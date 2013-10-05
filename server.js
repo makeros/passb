@@ -8,18 +8,31 @@ var
   , socketIO = require('socket.io').listen(server)
   , fs = require('fs')
   , mustache = require('mu2')
-
+  , serverProtocol = 'http://'
+  , serverHost 
   , serverPort = process.env.PORT || 3333
-  , sockets = {};
+  , clients = {};
   ;
+
 
 mustache.root = __dirname + '/templates';
 mustache.clearCache();
 
-socketIO.set("origins","*:*");
+// socketIO.set("origins","*:*");
 socketIO.set("log level",2);
 socketIO.set('transports', ['xhr-polling']);
 socketIO.set("polling duration", 60);
+
+app.use(express.logger());
+app.use(express.bodyParser());
+app.use('/public', express.static(__dirname + "/public"));
+
+/* start server ! */
+server.listen(serverPort, function () {
+  serverHost = server.address();  
+  console.log('Server started at port ', serverHost);
+});
+
 
 function watchSocket (id) {
 
@@ -34,7 +47,7 @@ function watchSocket (id) {
 
     socket.on('refresh', function () {
       console.log('refresh received on group ',P);
-      P.emit('refresh', {url : sockets[id].url});
+      P.emit('refresh', {url : clients[id].url});
     });
 
     /*user disconnecting*/
@@ -56,7 +69,7 @@ function renderErrorPage (err, res) {
     , htmlData = ''
   ;
 
-  console.log('/watch, sockets: ',sockets)
+  console.log('/watch, sockets: ',clients)
   params = {
     error : {
       code : err.code,
@@ -82,44 +95,42 @@ function renderErrorPage (err, res) {
 
 }
 
-app.get('/get-client/bookmarklet', function (req, res) {
-
+function getBookmarklet () {
   fs.readFile('./bookmarklet/passb.js', function (err, data) {
+
     if (err) {
       res.send(404);
       throw err;
     }
-    
-    res.set({
-      'Content-Type': 'text/javascript',
-    });
 
-    res.send(data);
+  });
+}
 
+app.get('/', function (req, res) {
+  var 
+    params = {}
+    , htmlData = ''
+  ;
+
+  params = {};
+
+  res.set({
+    'Content-Type': 'html',
+  });
+
+  mustache.compileAndRender('main_page.html', params)
+  .on('error', function (e){
+    console.log(e);
+    res.send(404);
+  })
+  .on('data', function (data) {
+    htmlData += data;
+  })
+  .on('end', function () {
+    res.send(htmlData.toString());
   });
 
 });
-
-app.get('/get-client/socket-io-client', function (req, res) {
-
-  fs.readFile('./node_modules/socket.io-client/dist/socket.io.min.js', function (err, data) {
-    if (err) {
-      res.send(404);
-      throw err;
-    }
-    
-    res.set({
-      'Content-Type': 'text/javascript',
-    });
-    
-    res.send(data);
-
-  });
-
-});
-
-
-
 
 app.get('/preview', function (req, res) {
 
@@ -129,19 +140,16 @@ app.get('/preview', function (req, res) {
   var 
     timestamp = new Date().getTime()
     , unique_id = timestamp
-    ,redirect_url = 'http://localhost:3333/watch/'+unique_id
+    , redirect_url = '/watch/'+unique_id
   ;
   
   new watchSocket(unique_id);
 
-  sockets[unique_id] = {
+  clients[unique_id] = {
     url : req.query.url
   };
 
-  //res.header('Content-Length', redirect_url.length);
   res.redirect(redirect_url);
-  //res.end(redirect_url);
-
 
 });
 
@@ -155,9 +163,9 @@ app.get('/watch/:id', function (req, res) {
     unique_id = req.params.id
   ;
 
-  console.log('/watch, sockets: ',sockets);
+  console.log('/watch, sockets: ',clients);
 
-  if (!sockets[unique_id]) {
+  if (!clients[unique_id]) {
 
     var err = {
       code : '404',
@@ -169,8 +177,9 @@ app.get('/watch/:id', function (req, res) {
 
 
   params = {
-    preview_url : sockets[unique_id].url,
-    unique_id : unique_id
+    preview_url : clients[unique_id].url,
+    unique_id : unique_id,
+    server_address : serverProtocol+serverHost+':'+serverPort+'/user/'+unique_id
   };
 
   res.set({
@@ -189,10 +198,4 @@ app.get('/watch/:id', function (req, res) {
     res.send(htmlData.toString());
   });
 
-
 });
-
-
-/* start server ! */
-server.listen(serverPort);
-console.log('Server started at port '+serverPort);

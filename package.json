@@ -1,9 +1,13 @@
 {
   "name": "passb",
+  "version": "0.1.0",
   "dependencies": {
     "express": "~3.4.0",
     "express-validator": "~0.8.0",
     "socket.io": "~0.9.16",
     "mu2": "~0.5.19"
+  },
+  "devDependencies": {
+    "mocha": "~1.13.0"
   }
 }

@@ -1,0 +1,21 @@
+html{
+    height:100%;
+}
+body {
+    margin:0;
+    padding: 0;
+    height: 100%;
+}
+#preview-window{
+    margin:0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    display:block;
+    border:none;
+}
+#passb-menu {
+    position: fixed;
+    bottom:0;
+    right:0;
+}
