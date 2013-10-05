@@ -1,0 +1,9 @@
+{
+  "name": "passb",
+  "dependencies": {
+    "express": "~3.4.0",
+    "express-validator": "~0.8.0",
+    "socket.io": "~0.9.16",
+    "mu2": "~0.5.19"
+  }
+}
