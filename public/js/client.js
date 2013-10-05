@@ -1,14 +1,13 @@
-window.onload = function () {
+onConnected = function (socket) {
 
   var 
     N_preview_window = document.getElementById('preview-window')
-    , socketUrl = window.location.origin+'/user/{{unique_id}}'
-    , socket = io.connect(socketUrl)
+
     , mainIframe = document.getElementById('preview-window')
-    btn_refresh = document.getElementById('js_menu-refresh')
+    , btn_refresh = document.getElementById('js_menu-refresh')
     ;
 
-    console.log(socketUrl);
+    
 
 
     socket.on('refresh', function (data) {
@@ -60,5 +59,5 @@ window.onload = function () {
     };
 
     disableRefresh();
-    
+
 };

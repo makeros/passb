@@ -11,6 +11,19 @@
 
         <script src="/public/js/vendor/socket.io.min.js"></script>
         <script type="text/javascript" src="/public/js/client.js"></script>
+        <script type="text/javascript">
+            window.onload = function () {
+                var socketUrl = window.location.origin+'/user/{{unique_id}}';
+                var socket = io.connect(socketUrl)
+                
+                console.log('url: ',socketUrl);
+                
+
+                if (socket) {
+                    onConnected (socket);
+                }
+            }
+        </script>
     </head>
     <body>
         <nav id="passb-menu">
