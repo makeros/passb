@@ -95,16 +95,6 @@ function renderErrorPage (err, res) {
 
 }
 
-function getBookmarklet () {
-  fs.readFile('./bookmarklet/passb.js', function (err, data) {
-
-    if (err) {
-      res.send(404);
-      throw err;
-    }
-
-  });
-}
 
 app.get('/', function (req, res) {
   var 
@@ -112,7 +102,7 @@ app.get('/', function (req, res) {
     , htmlData = ''
   ;
 
-  params = {};
+  params = {  };
 
   res.set({
     'Content-Type': 'html',
