@@ -1,6 +1,6 @@
 var SingleWatch = require('../lib/singleWatch.js')
 
-describe('Test single watch object', function () {
+describe('Test single watch object with proper init values', function () {
 
   var sw = new SingleWatch({
     url : 'http://passb.herokuapp.com',
@@ -20,7 +20,7 @@ describe('Test single watch object', function () {
     sw.increaseWatchCount();
 
     sw.getWatchCount().should.be.a('number');
-    sw.getWatchCount().should.be.above(0);
+    sw.getWatchCount().should.be.above(0).equal(1);
     
     done();
 

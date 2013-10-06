@@ -5,11 +5,14 @@ var
   , app = express()
   , http = require('http')
   , server = http.createServer(app)
-  , socketIO = require('socket.io').listen(server)
+
   , fs = require('fs')
   , mustache = require('mu2')
   , crc32 = require('crc32')
+
   , SingleWatch = require('./lib/singleWatch')
+  , WatchSocket = require('./lib/watchSocket')(server)
+
   , serverProtocol = 'http://'
   , serverHost 
   , serverPort = process.env.PORT || 3333
@@ -21,11 +24,7 @@ var
 mustache.root = __dirname + '/templates';
 mustache.clearCache();
 
-// socketIO.set("origins","*:*");
-socketIO.set("close timeout",30);
-socketIO.set("log level",2);
-socketIO.set('transports', ['xhr-polling']);
-socketIO.set("polling duration", 60);
+
 
 app.use(express.logger());
 app.use(express.bodyParser());
@@ -40,45 +39,7 @@ server.listen(serverPort, function () {
 
 
 
-function watchSocket (id) {
 
-  var P = socketIO
-  .of('/user/'+id)
-  .on('connection', function (socket) {
-
-    console.log('Client on socket /user/'+id+' : '+socket.id+' connected.');
-
-    clients[id].increaseWatchCount();
-
-    P.emit('preview', {
-      watchCount : clients[id].getWatchCount()
-    });
-
-    socket.on('refresh', function () {
-      console.log('refresh received on group ',P);
-      
-      P.emit('refresh', {
-        url : clients[id].url
-      });
-
-    });
-
-    /*user disconnecting*/
-    socket.on('disconnect', function () {
-
-      console.log('socket ',socket.id, 'disconnected function');
-      
-      clients[id].decreaseWatchCount();
-
-      P.emit('preview', {
-        watchCount : clients[id].getWatchCount()
-      });
-    });
-
-  });
-
-  return P;
-}
 
 function renderErrorPage (err, res) {
   
@@ -151,7 +112,7 @@ app.get('/preview', function (req, res) {
     , redirect_url = '/watch/'+unique_id
   ;
   
-  new watchSocket(unique_id);
+  WatchSocket(clients, unique_id);
 
   clients[unique_id] = new SingleWatch({
     url : req.query.url,
