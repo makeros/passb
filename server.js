@@ -9,28 +9,14 @@ var
   , fs = require('fs')
   , mustache = require('mu2')
   , crc32 = require('crc32')
+  , SingleWatch = require('./lib/singleWatch')
   , serverProtocol = 'http://'
   , serverHost 
   , serverPort = process.env.PORT || 3333
   , clients = {};
   ;
 
-var SingleWatch = function (initData) {
-  
-  this.url = initData.url;
 
-  this.watchCount = initData.watchCount;
-
-};
-SingleWatch.prototype.getWatchCount = function () {
-  return this.watchCount;
-};
-SingleWatch.prototype.increaseWatchCount = function () {
-  this.watchCount++;
-};
-SingleWatch.prototype.decreaseWatchCount = function () {
-  this.watchCount--;
-};
 
 mustache.root = __dirname + '/templates';
 mustache.clearCache();
