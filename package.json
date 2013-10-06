@@ -5,7 +5,8 @@
     "express": "~3.4.0",
     "express-validator": "~0.8.0",
     "socket.io": "~0.9.16",
-    "mu2": "~0.5.19"
+    "mu2": "~0.5.19",
+    "crc32": "~0.2.2"
   },
   "devDependencies": {
     "mocha": "~1.13.0"

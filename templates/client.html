@@ -14,24 +14,33 @@
         <script type="text/javascript">
             window.onload = function () {
                 var socketUrl = window.location.origin+'/user/{{unique_id}}';
-                var socket = io.connect(socketUrl)
+                var socket = io.connect(socketUrl, {
+                    'sync disconnect on unload ': true
+                });
+                var client = getClient();
+
                 
                 console.log('url: ',socketUrl);
                 
-
                 if (socket) {
-                    onConnected (socket);
+                    client.onConnected (socket);
                 }
-            }
+                else{
+                    client.notConnected ();
+                }
+
+            };
         </script>
     </head>
     <body>
         <nav id="passb-menu">
+
             <ul>
-                <li><button>spread</button></li>
+                <li><span id="js_connection-status" class="connection-status">failed</span></li>
                 <li><button id="js_menu-refresh">Refresh</button></li>
+                <li>window count: <span id="js_preview-client-count">0</span></li>
             </ul>
         </nav>
-        <iframe onload="this.contentWindow.focus()" id="preview-window" width="100%" height="100%" src="{{preview_url}}" ></iframe>
+        <iframe onload="this.contentWindow.focus()" id="js_preview-window" width="100%" height="100%" src="{{preview_url}}" ></iframe>
     </body>
 </html>

@@ -19,3 +19,11 @@ body {
     bottom:0;
     right:0;
 }
+.connection-status {
+}
+.connection-status.status-ok {
+    color:green;
+}
+.connection-status.status-failed {
+    color:red;
+}
