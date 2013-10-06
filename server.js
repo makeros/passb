@@ -16,7 +16,7 @@ var
   , serverProtocol = 'http://'
   , serverHost 
   , serverPort = process.env.PORT || 3333
-  , clients = {};
+  , clients = Array();
   ;
 
 
@@ -36,7 +36,16 @@ server.listen(serverPort, function () {
   console.log('Server started at port ', serverHost);
 });
 
-
+function objectLength(obj) {
+  var result = 0;
+  for(var prop in obj) {
+    if (obj.hasOwnProperty(prop)) {
+    // or Object.prototype.hasOwnProperty.call(obj, prop)
+      result++;
+    }
+  }
+  return result;
+}
 
 
 
@@ -80,8 +89,10 @@ app.get('/', function (req, res) {
     params = {}
     , htmlData = ''
   ;
-
-  params = {  };
+  console.log('=====pages view count : ', objectLength(clients), clients);
+  params = { 
+    activePagesCount : objectLength(clients)
+  };
 
   res.set({
     'Content-Type': 'html',
