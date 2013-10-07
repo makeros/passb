@@ -19,8 +19,19 @@
 
         <!-- Add your site or application content here -->
         <h1>PassB main page!</h1>
-        <h2>Pages in view: {{activePagesCount}}</h2>
-
+        <section>
+          
+          <div>
+            <h2>Pages in view: {{activePagesCount}}</h2>
+          </div>
+          <div>
+            <h2>Enter your code: 
+              <form id="form_uniqeu-id" method="get" action="/watch/">
+                <input type="text" maxlength="8" name="unique_id" id="input_unique-id" placeholder="Enter code..."/>
+              <button>OK</button>
+            </form>
+          </div>
+        </section>
         <a href="javascript:(function(){var jsCode = document.createElement('script');jsCode.setAttribute('src', 'http://passb.herokuapp.com/public/js/passb_bookmarklet.js');document.head.appendChild(jsCode);}());">PassB bookmarklet</a>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
