@@ -1,7 +1,8 @@
 
 
-function getClient () {
+function getClient (uid) {
 
+    var uid = uid;
 
     return {
 
@@ -16,6 +17,10 @@ function getClient () {
         registerSocketOnActions  : function (socket) {
 
             var self = this;
+
+            socket.on('get_unique_id', function (){
+                socket.emit('get_unique_id', uid);
+            });
 
             socket.on('refresh', function (data) {
 

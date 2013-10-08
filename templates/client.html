@@ -13,11 +13,11 @@
         <script type="text/javascript" src="/public/js/client.js"></script>
         <script type="text/javascript">
             window.onload = function () {
-                var socketUrl = window.location.origin+'/user/{{unique_id}}';
+                var socketUrl = window.location.origin+'/user/';
                 var socket = io.connect(socketUrl, {
                     'sync disconnect on unload ': true
                 });
-                var client = getClient();
+                var client = getClient('{{unique_id}}');
 
                 
                 console.log('url: ',socketUrl);

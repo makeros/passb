@@ -10,13 +10,13 @@ var
   , mustache = require('mu2')
   , crc32 = require('crc32')
 
-  , SingleWatch = require('./lib/singleWatch')
-  , WatchSocket = require('./lib/watchSocket')(server)
 
   , serverProtocol = 'http://'
   , serverHost 
   , serverPort = process.env.PORT || 3333
-  , clients = Array();
+  , clients = Array()
+  , SingleWatch = require('./lib/singleWatch')
+  , WatchSocket = require('./lib/watchSocket')(server, clients)
   ;
 
 
@@ -26,7 +26,7 @@ mustache.clearCache();
 
 
 
-app.use(express.logger());
+// app.use(express.logger());
 app.use(express.bodyParser());
 app.use('/public', express.static(__dirname + "/public"));
 
@@ -90,6 +90,7 @@ app.get('/', function (req, res) {
     , htmlData = ''
   ;
   console.log('=====pages view count : ', objectLength(clients), clients);
+
   params = { 
     activePagesCount : objectLength(clients)
   };
@@ -112,6 +113,7 @@ app.get('/', function (req, res) {
 
 });
 
+/*called only once!*/
 app.get('/preview', function (req, res) {
 
   console.log('preview request body',req.query);
@@ -123,7 +125,7 @@ app.get('/preview', function (req, res) {
     , redirect_url = '/watch/'+unique_id
   ;
   
-  WatchSocket(clients, unique_id);
+  // WatchSocket(clients, unique_id);
 
   clients[unique_id] = new SingleWatch({
     url : req.query.url,
