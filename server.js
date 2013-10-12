@@ -15,7 +15,7 @@ var
   , serverHost 
   , serverPort = process.env.PORT || 3333
   , clients = Array()
-  , SingleWatch = require('./lib/singleWatch')
+  , Group = require('./lib/group')
   , WatchSocket = require('./lib/watchSocket')(server, clients)
   ;
 
@@ -113,7 +113,7 @@ app.get('/preview', function (req, res) {
   
   // WatchSocket(clients, unique_id);
 
-  clients[unique_id] = new SingleWatch({
+  clients[unique_id] = new Group({
     url : req.query.url,
     watchCount : 0
   });
