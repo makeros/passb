@@ -9,7 +9,7 @@ var
   , fs = require('fs')
   , mustache = require('mu2')
   , crc32 = require('crc32')
-
+  , utils = require('./lib/utils.js')
 
   , serverProtocol = 'http://'
   , serverHost 
@@ -35,20 +35,6 @@ server.listen(serverPort, function () {
   serverHost = server.address();  
   console.log('Server started at port ', serverHost);
 });
-
-function objectLength(obj) {
-  var result = 0;
-  for(var prop in obj) {
-    if (obj.hasOwnProperty(prop)) {
-    // or Object.prototype.hasOwnProperty.call(obj, prop)
-      result++;
-    }
-  }
-  return result;
-}
-
-
-
 
 function renderErrorPage (err, res) {
   
@@ -92,7 +78,7 @@ app.get('/', function (req, res) {
   console.log('=====pages view count : ', objectLength(clients), clients);
 
   params = { 
-    activePagesCount : objectLength(clients)
+    activePagesCount : utils.objLength(clients)
   };
 
   res.set({

@@ -19,7 +19,7 @@ function getClient (uid) {
             var self = this;
 
             socket.on('get_unique_id', function (){
-                socket.emit('get_unique_id', uid);
+                socket.emit('join_room', uid);
             });
 
             socket.on('refresh', function (data) {
@@ -48,7 +48,7 @@ function getClient (uid) {
 
             var passbRefresh = function () {
                 console.log('socket emit refresh');
-                socket.emit('refresh');
+                socket.emit('refresh', uid);
             };
 
             this.N.btn_refresh.onclick = passbRefresh;
@@ -68,11 +68,8 @@ function getClient (uid) {
 
                 };
 
-                // disable f5
-                // console.log('block F5', mainIframe);
 
                 window.addEventListener("keydown", disableF5, true);
-                // mainIframe.document.addEventListener("keydown", disableF5, true);
 
             };
 
