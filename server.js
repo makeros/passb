@@ -18,11 +18,8 @@ var
   ;
 
 
-
 mustache.root = __dirname + '/templates';
 mustache.clearCache();
-
-
 
 // app.use(express.logger());
 app.use(express.bodyParser());
