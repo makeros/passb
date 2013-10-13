@@ -14,9 +14,9 @@ var
   , serverProtocol = 'http://'
   , serverHost 
   , serverPort = process.env.PORT || 3333
-  , clients = Array()
+  , groups = Array()
   , Group = require('./lib/group')
-  , WatchSocket = require('./lib/watchSocket')(server, clients)
+  , WatchSocket = require('./lib/watchSocket')(server, groups)
   ;
 
 
@@ -43,7 +43,7 @@ function renderErrorPage (err, res) {
     , htmlData = ''
   ;
 
-  console.log('/watch, sockets: ',clients)
+  console.log('/watch, sockets: ',groups)
   params = {
     error : {
       code : err.code,
@@ -75,10 +75,10 @@ app.get('/', function (req, res) {
     params = {}
     , htmlData = ''
   ;
-  console.log('=====pages view count : ', objectLength(clients), clients);
+  console.log('=====pages view count : ', utils.objLength(groups), groups);
 
   params = { 
-    activePagesCount : utils.objLength(clients)
+    activePagesCount : utils.objLength(groups)
   };
 
   res.set({
@@ -111,9 +111,9 @@ app.get('/preview', function (req, res) {
     , redirect_url = '/watch/'+unique_id
   ;
   
-  // WatchSocket(clients, unique_id);
+  // WatchSocket(groups, unique_id);
 
-  clients[unique_id] = new Group({
+  groups[unique_id] = new Group({
     url : req.query.url,
     watchCount : 0
   });
@@ -132,9 +132,9 @@ app.get('/watch/:id', function (req, res) {
     unique_id = req.params.id
   ;
 
-  console.log('/watch, sockets: ',clients);
+  console.log('/watch, sockets: ',groups);
 
-  if (!clients[unique_id]) {
+  if (!groups[unique_id]) {
 
     var err = {
       code : '404',
@@ -146,7 +146,7 @@ app.get('/watch/:id', function (req, res) {
 
 
   params = {
-    preview_url : clients[unique_id].url,
+    preview_url : groups[unique_id].url,
     unique_id : unique_id,
     server_address : serverProtocol+serverHost+':'+serverPort+'/user/'+unique_id
   };
