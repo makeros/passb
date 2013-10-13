@@ -28,7 +28,7 @@ app.use('/public', express.static(__dirname + "/public"));
 /* start server ! */
 server.listen(serverPort, function () {
   serverHost = server.address();  
-  console.log('Server started at port ', serverHost);
+  // console.log('Server started at port ', serverHost);
 });
 
 function renderErrorPage (err, res) {

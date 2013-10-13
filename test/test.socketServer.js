@@ -24,6 +24,7 @@ describe('Test socket server', function () {
   var socket;
 
   before(function (done){
+    this.timeout(20000);
     socket = SocketClient.connect(socketUrl, {
         'sync disconnect on unload ': true
     });
