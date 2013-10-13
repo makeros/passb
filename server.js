@@ -1,35 +1,22 @@
 /* @file server.js */
 
-var 
-  express = require('express')
-  , app = express()
-  , http = require('http')
-  , server = http.createServer(app)
+var
 
-  , fs = require('fs')
+  fs = require('fs')
   , mustache = require('mu2')
   , crc32 = require('crc32')
   , utils = require('./lib/utils.js')
 
-  , serverPort = process.env.PORT || 3333
   , groups = Array()
   , Group = require('./lib/group')
-  , SocketServer = require('./lib/socketServer')(server, groups)
+  , SocketServer = require('./lib/socketServer')(groups)
+  , app = require('./lib/socketServer').app
   ;
 
 
 mustache.root = __dirname + '/templates';
 mustache.clearCache();
 
-// app.use(express.logger());
-app.use(express.bodyParser());
-app.use('/public', express.static(__dirname + "/public"));
-
-/* start server ! */
-server.listen(serverPort, function () {
-  serverHost = server.address();  
-  // console.log('Server started at port ', serverHost);
-});
 
 function renderErrorPage (err, res) {
   

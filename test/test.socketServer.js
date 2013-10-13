@@ -4,10 +4,10 @@ var
   // , http = require('http')
   // , server = http.createServer(app)
   // , serverPort = 3333
-   // groups = Array()
-  SocketClient = require('socket.io-client')
+  groups = Array()
+  , SocketClient = require('socket.io-client')
   // , Group = require('./../lib/group')
-  // , SocketServer = require('./../lib/socketServer')(server, groups)
+  , SocketServer = require('./../lib/socketServer')(groups)
   ;
 
 // var serverHost;
