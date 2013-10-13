@@ -37,6 +37,10 @@ function getClient (uid) {
                 self.N.previewClientCount.innerHTML = data.watchCount;
             
             });
+
+            socket.on('group_dont_exists', function(){
+                window.location.reload();
+            });
         },
         onConnected : function (socket) {
 

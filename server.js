@@ -11,12 +11,10 @@ var
   , crc32 = require('crc32')
   , utils = require('./lib/utils.js')
 
-  , serverProtocol = 'http://'
-  , serverHost 
   , serverPort = process.env.PORT || 3333
   , groups = Array()
   , Group = require('./lib/group')
-  , WatchSocket = require('./lib/watchSocket')(server, groups)
+  , SocketServer = require('./lib/socketServer')(server, groups)
   ;
 
 
@@ -77,6 +75,8 @@ app.get('/', function (req, res) {
   ;
   console.log('=====pages view count : ', utils.objLength(groups), groups);
 
+  mustache.clearCache();
+
   params = { 
     activePagesCount : utils.objLength(groups)
   };
@@ -111,8 +111,6 @@ app.get('/preview', function (req, res) {
     , redirect_url = '/watch/'+unique_id
   ;
   
-  // WatchSocket(groups, unique_id);
-
   groups[unique_id] = new Group({
     url : req.query.url,
     watchCount : 0
@@ -148,7 +146,6 @@ app.get('/watch/:id', function (req, res) {
   params = {
     preview_url : groups[unique_id].url,
     unique_id : unique_id,
-    server_address : serverProtocol+serverHost+':'+serverPort+'/user/'+unique_id
   };
 
   res.set({
