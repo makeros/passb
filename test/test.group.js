@@ -7,6 +7,26 @@ describe('Test single group object with proper init values', function () {
     watchCount : 0
   });
 
+  it('check if new props are not ommited in test',function (done){
+    
+    var methods = [
+      'getCount',
+      'increaseCount',
+      'decreaseCount',
+      'increaseRefresh',
+      'url',
+      'watchCount',
+      'refreshCount'
+      ];
+
+    for (var prop in group){
+      if ( methods.indexOf(prop) === -1 ) return;
+    }
+
+    done();
+
+  });
+
   it('Get watch count ', function (done) {
 
     group.getCount().should.be.a('number');

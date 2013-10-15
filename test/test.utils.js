@@ -3,6 +3,18 @@ var Utils = require('../lib/utils.js');
 
 describe('Test Utils objLength function', function (){
 
+  it('check if new props are not ommited in test',function (done){
+    
+    var methods = ['objLength'];
+
+    for (var prop in Utils){
+      if ( methods.indexOf(prop) === -1 ) return;
+    }
+
+    done();
+
+  });
+
   it('Should count keys in a iteration array', function (done) {
 
     var keysCount;
