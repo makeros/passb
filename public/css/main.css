@@ -1,5 +1,5 @@
 body {
-
+  margin-top: 25px;
 }
 
 #board-section {
@@ -7,6 +7,14 @@ body {
   padding: 30px;
   border-radius: 5px;
 }
+#sidebar-menu {
+  position: -webkit-sticky;
+  position: -moz-sticky;
+  position: -ms-sticky;
+  position: -o-sticky;
+  top: 50px;
+}
+
 .help-link {
   display:block;
   /*width: 200px;*/
