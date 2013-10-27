@@ -1,6 +1,30 @@
 body {
-  margin-top: 25px;
+  margin-top: 70px;
 }
+
+@grid-float-breakpoint:     400px;
+
+#logo {
+  
+  /*-webkit-transform: translateY(0);*/
+  position:relative;
+}
+#logo > div {
+  position: absolute;
+}
+.logo-P{
+  font-size: 46px;
+  -webkit-transform: scaleX(2) rotate(-90deg);
+
+}
+#logo .logo-ass{
+  -webkit-transform: translateY(40px);
+}
+#logo .logo-B{
+  -webkit-transform: scaleX(2) translateY(35px) rotate(90deg);
+  font-size: 46px;
+}
+
 
 #board-section {
   background-color: #f3f3f3;
@@ -37,7 +61,7 @@ body {
   display: block;
   margin: auto;
   width: 300px;
-  height:200px;
+  height:300px;
 }
 .btn-install-bookmarklet {
   display:inline;
@@ -45,4 +69,13 @@ body {
 }
 a.btn-install-bookmarklet-a > button:hover{
   text-decoration: none;
+}
+
+.box300-placeholder {
+  width:300px; 
+  height: 300px; 
+  color: #111; 
+  background-color:grey; 
+  display:block;
+  margin: auto;
 }

@@ -10,7 +10,7 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="/public/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/public/css/bootstrap.css">
         <link rel="stylesheet" href="/public/css/main.css">
 
         <!-- Optional theme -->
@@ -23,62 +23,74 @@
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        <div class="row container">
-            <nav class="col-sm-3">
-                <ul id="sidebar-menu" class="nav nav-pills nav-stacked">
-                  <li class="active"><a href="#">Start</a></li>
-                  <li><a href="#">Stats</a></li>
-                  <li><a href="#">How it works</a></li>
-                </ul>
-            </nav>
-            <div class="col-sm-9">
-                <header class="header">
-                  
-                  <h1 class="">PassB</h1>
-                  
-                </header>
+<!--         <div id="logo">
+            <div class="logo-P">P</div>
+            <div class="logo-ass">ass</div>
+            <div class="logo-B">B</div>
+        </div> -->
+        <header class="header">
+            <nav class="navbar navbar-default navbar-fixed-top " role="navigation" >
                 
-                <div class="">
-                    
-                    <section id="board-section" class="jumbotron ">
-                      <div class="container row text-center">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        <div class="col-sm-6">
+                <ul class="nav navbar-nav">
+                    <li><span class="">PassB</span></li>
+                    <li class="active"><a href="#">StartS</a></li>
+                    <li><a href="#">Stats</a></li>
+                    <li><a href="#">How it works</a></li>
+                </ul> 
+                <span class="navbar-right version-info label label-default ">v.0.1.0</span>
+            </nav>
+                  
+            </header>
+        <div class=" container">
 
-                            <h2>Install</h2>
-                            <a alt="PassB bookmarklet" id="js_install-bookmarklet" class="btn-install-bookmarklet-a" onclick="return false;"  href="javascript:(function(){var jsCode = document.createElement('script');jsCode.setAttribute('src', 'http://passb.herokuapp.com/public/js/passb_bookmarklet.js');document.head.appendChild(jsCode);}());">
-                              <button class="btn btn-lg btn-danger btn-install-bookmarklet"><span class="glyphicon glyphicon-hand-up"></span>&nbsp;&nbsp;Drop me on your bookmarks!
-                              </button>
-                            </a>
-                            <a href="#" class="help-link text-muted">Eee, what?</a>
-                        </div>
-                        <div class="col-sm-6">
-                          <h2>Enter your code</h2>
-                            <form class="" id="form_unique-id" method="get" action="/watch/">
-                              <input class="form-control input-lg input-code" type="text" maxlength="8" name="unique_id" id="input_unique-id" placeholder="Enter code..."/>
-                              <button class="btn btn-lg btn-primary ">Go!&nbsp;&nbsp;<span class="glyphicon glyphicon-play"></span></button>
-                            </form>
-                        </div>
-                     </div>
-                    </section>
-                    <section>
-                    
-                    </section>
-                    <section>
-                      <div data-count="{{activePagesCount}}" id="js_pages-in-view" class="pages-in-use"></div>
-                    </section>
+            <section id="board-section" class="jumbotron ">
+              <div class="container row text-center">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <div class="col-sm-6">
 
-                    <h2>How is it working?</h2>
-                    <section id="explain-section">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque congue purus lacus, sit amet gravida ipsum vestibulum sed. Vestibulum dapibus tincidunt ornare. Phasellus feugiat tellus id interdum ornare. Sed interdum arcu nisi, id sollicitudin sem commodo quis. Maecenas egestas fringilla viverra. Phasellus malesuada volutpat magna id lobortis. Curabitur eu rutrum elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sollicitudin leo arcu, in rhoncus enim vestibulum in. Duis quis euismod sem, nec porttitor tortor.</p>
-
-                        <p>Vivamus vel nulla arcu. Ut ornare orci interdum cursus congue. Ut vitae risus non purus aliquam ultrices id in orci. Vivamus vitae mauris a tellus blandit malesuada vitae id libero. Duis egestas risus ac dui tincidunt, vel ullamcorper nulla tempor. Suspendisse fermentum ut metus at adipiscing. Vestibulum hendrerit, risus ac semper eleifend, nisl dui imperdiet purus, eu consectetur ipsum augue a augue.</p>
-                    </section>
+                    <h2>Install</h2>
+                    <a alt="PassB bookmarklet" id="js_install-bookmarklet" class="btn-install-bookmarklet-a" onclick="return false;"  href="javascript:(function(){var jsCode = document.createElement('script');jsCode.setAttribute('src', 'http://passb.herokuapp.com/public/js/passb_bookmarklet.js');document.head.appendChild(jsCode);}());">
+                      <button class="btn btn-lg btn-danger btn-install-bookmarklet"><span class="glyphicon glyphicon-hand-up"></span>&nbsp;&nbsp;Drop me on your bookmarks!
+                      </button>
+                    </a>
+                    <a href="#" class="help-link text-muted">Eee, what?</a>
                 </div>
-            </div>
+                <div class="col-sm-6">
+                  <h2>Enter your code</h2>
+                    <form class="" id="form_unique-id" method="get" action="/watch/">
+                      <input class="form-control input-lg input-code" type="text" maxlength="8" name="unique_id" id="input_unique-id" placeholder="Enter code..."/>
+                      <button class="btn btn-lg btn-primary ">Go!&nbsp;&nbsp;<span class="glyphicon glyphicon-play"></span></button>
+                    </form>
+                </div>
+             </div>
+            </section>
+
+            <h2>Stats</h2>
+            <section class="row">
+              <div class="col-sm-6">
+                
+                <div data-count="{{activePagesCount}}" id="js_pages-in-view" class="pages-in-use"></div>
+                  
+              </div>
+              <div class="col-sm-6">
+                
+                <div class="box300-placeholder">
+                    opened windows
+                </div>               
+                <!-- <div data-count="{{activePagesCount}}" id="js_pages-in-view" class="pages-in-use"></div> -->
+                  
+              </div>  
+            </section>
+
+            <h2>How is it working?</h2>
+            <section id="explain-section">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque congue purus lacus, sit amet gravida ipsum vestibulum sed. Vestibulum dapibus tincidunt ornare. Phasellus feugiat tellus id interdum ornare. Sed interdum arcu nisi, id sollicitudin sem commodo quis. Maecenas egestas fringilla viverra. Phasellus malesuada volutpat magna id lobortis. Curabitur eu rutrum elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sollicitudin leo arcu, in rhoncus enim vestibulum in. Duis quis euismod sem, nec porttitor tortor.</p>
+
+                <p>Vivamus vel nulla arcu. Ut ornare orci interdum cursus congue. Ut vitae risus non purus aliquam ultrices id in orci. Vivamus vitae mauris a tellus blandit malesuada vitae id libero. Duis egestas risus ac dui tincidunt, vel ullamcorper nulla tempor. Suspendisse fermentum ut metus at adipiscing. Vestibulum hendrerit, risus ac semper eleifend, nisl dui imperdiet purus, eu consectetur ipsum augue a augue.</p>
+            </section>
         </div>
         <footer class="footer">
-          <span class="version-info label label-default ">v.0.1.0</span>
+          
         </footer>
 
         <!-- Latest compiled and minified JavaScript -->

@@ -4259,7 +4259,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
     background-image: none;
   }
 }
-
+/* edited: arek; */
 @media (min-width: 768px) {
   .navbar-nav {
     float: left;

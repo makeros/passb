@@ -5,9 +5,12 @@ body {
     margin:0;
     padding: 0;
     height: 100%;
+    overflow : hidden;
 }
 iframe {
     border: none;
+    height: 100%;
+    width: 100%;
 }
 #preview-window{
     margin:0;
@@ -19,12 +22,40 @@ iframe {
 }
 #passb-menu {
     position: fixed;
+    /*background-color: white;*/
+
     bottom:0;
     right:0;
     margin:0;
-    padding:0;
+    padding:5px;
     border:none;
 }
+
+#passb-menu.passb-menu-small {
+    width:30px;
+    height:30px;
+    background-color: red;
+
+}
+#passb-menu.passb-menu-normal {
+
+}
+
+#passb-menu > #passb-menu-normal {
+    display:none;
+}
+
+#passb-menu > #passb-menu-small {
+    
+}
+#passb-menu ul {
+    margin:0;
+    padding: 0;
+}
+#passb-menu ul li {
+    list-style: none;
+}
+
 .connection-status {
 }
 .connection-status.status-ok {
